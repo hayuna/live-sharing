@@ -6,3 +6,6 @@
 - [ ] Edit user
 - [ ] Delete user
 - [ ] Add friends for user
+# Lesson 3
+- [ ] Content to looged user
+- [ ] Content to not logged user
