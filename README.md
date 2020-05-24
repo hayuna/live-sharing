@@ -6,3 +6,6 @@
 - [ ] Edit user
 - [ ] Delete user
 - [ ] Add friends for user
+# Lesson 3
+- [ ] Different store for logged user
+- [ ] Different store for guest user
