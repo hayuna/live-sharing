@@ -9,3 +9,5 @@
 # Lesson 3
 - [ ] Different store for logged user
 - [ ] Different store for guest user
+# Lesson 4
+- [ ] Add backend in Deno / Node
