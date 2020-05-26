@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
-import store from './redux/store'
+import { useSelector, useStore } from 'react-redux'
 import * as action from './redux/action.creators'
 
-
 const Login = () => {
+    const store = useStore()
     const login = useSelector(state => state.login);
     const email = useSelector(state => state.email);
     const date = useSelector(state => state.date);
@@ -22,7 +21,7 @@ const Login = () => {
     }
 
     const logger = () => {
-        const newState = store.getState().userReducer;
+        const newState = store.getState();
         console.log(newState);
     }
 
