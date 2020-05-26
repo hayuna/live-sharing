@@ -25,7 +25,7 @@ const userReducer = (state = user, action) => {
         };
         case actionTypes.ADD_NEW_USER: return {
             ...state,
-            users: action.user
+            users: [...state.users, action.user]
         };
         case actionTypes.DELETE_USER: return {
             ...state,
