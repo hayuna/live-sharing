@@ -11,6 +11,5 @@
 - [ ] Different store for guest user
 # Lesson 4
 - [ ] Add backend in Deno / Node
-# Lesson 5
-- [ ] Remove users
+# Lesson 
 - [ ] Change dark/light mode
