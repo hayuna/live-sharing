@@ -1,9 +1,8 @@
 import { actionTypes } from "./action.types";
 
 const user = {
-    login: '',
-    email: '',
-    dateOfBirth: null
+    currentUser: {},
+    users: []
 }
 
 const userReducer = (state = user, action) => {
@@ -20,6 +19,19 @@ const userReducer = (state = user, action) => {
             ...state,
             dateOfBirth: action.dateOfBirth
         };
+        case actionTypes.SET_CURRENT_USER: return {
+            ...state,
+            currentUser: action.user
+        };
+        case actionTypes.ADD_NEW_USER: return {
+            ...state,
+            users: action.user
+        };
+        case actionTypes.DELETE_USER: return {
+            ...state,
+            user: action.user
+        };
+
         default: return state
     }
 }

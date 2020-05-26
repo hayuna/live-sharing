@@ -1,53 +1,49 @@
-import React from 'react';
-import { useSelector, useStore } from 'react-redux'
+import React, { useState } from 'react';
+import { useStore } from 'react-redux'
 import * as action from './redux/action.creators'
 
 const Login = () => {
-    const store = useStore()
-    const login = useSelector(state => state.login);
-    const email = useSelector(state => state.email);
-    const date = useSelector(state => state.date);
-
-    const setLogin = (login) => {
-        store.dispatch(action.reduxAddUser(login));
-    }
-
-    const setEmail = (email) => {
-        store.dispatch(action.reduxAddEmail(email));
-    }
-
-    const setDate = (date) => {
-        store.dispatch(action.reduxAddDateOfBirth(date));
-    }
+    const store = useStore();
+    const [currentUser, setCurrentUser] = useState({});
 
     const logger = () => {
         const newState = store.getState();
-        console.log(newState);
+        console.info(newState);
+    }
+
+    const addCurrentUser = () => {
+        store.dispatch(action.reduxSetCurrentUser(currentUser));
+    }
+
+    const addToUsers = () => {
+        store.dispatch(action.reduxAddNewUser(currentUser))
     }
 
     return (
         <div>
             <input
                 type='text'
-                value={login}
+                value={currentUser.login}
                 id='login'
                 placeholder='login'
-                onChange={(e) => setLogin(e.target.value)}
+                onChange={(e) => setCurrentUser({ ...currentUser, login: e.target.value })}
             />
             <input
                 type='text'
-                value={email}
+                value={currentUser.email}
                 id='email'
                 placeholder='email'
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setCurrentUser({ ...currentUser, email: e.target.value })}
             />
             <input
                 type='date'
-                value={date}
+                value={currentUser.date}
                 id='date'
-                onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => setCurrentUser({ ...currentUser, date: e.target.value })}
             />
             <button onClick={logger}>Show!</button>
+            <button onClick={addCurrentUser}>Add</button>
+            <button onClick={addToUsers}>Add to Users</button>
         </div>
     );
 }
