@@ -11,6 +11,7 @@
 - [ ] Different store for guest user
 # Lesson 4
 - [ ] Add backend in Deno / Node
+- [ ] Introduce typescript
 # Lesson 5
 - [ ] Change dark/light mode
 # Lesson 6
