@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from 'react-redux'
-import * as action from './redux/user.creators'
+import * as action from './redux/user.reducer'
 
 const Login = () => {
     const store = useStore();
