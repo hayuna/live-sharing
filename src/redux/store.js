@@ -1,11 +1,11 @@
-import { createStore, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import userReducer from './user.reducer';
+import { configureStore } from '@reduxjs/toolkit'
+import employee from './employee.reducer'
+import user from './user.reducer'
 
-const middlewares = [];
-
-const rootReducer = combineReducers({ userReducer });
-
-export default createStore(rootReducer, composeWithDevTools(...middlewares));
-
+export default configureStore({
+    reducer: {
+        employee,
+        user
+    }
+})
 
