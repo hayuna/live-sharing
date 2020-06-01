@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+live-sharing-ts/node_modules
 /.pnp
 .pnp.js
 .vscode
@@ -24,3 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 *.lock
 package-lock.json
+live-sharing-ts/node_modules/.yarn-integrity
