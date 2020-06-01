@@ -1,8 +1,49 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+
+interface Info {
+  name: string;
+  surname: string;
+  friends?: Friends[]
+};
+
+type Animal = {
+  animal: {
+    name: string;
+    gendre: string;
+    age: number;
+  }
+}
+type Friends = string | number | null | [] | Animal
+
+
+// string, number, null, undefined, boolean
+
+function App(): JSX.Element {
+
+  const [person, setPerson] = useState<Info>({
+    name: 'Lukasz',
+    surname: 'Kowalski',
+    friends: ["jacek", 0o07, 0x6, [], { animal: { name: "Jasiu", gendre: 'żółw', age: 1234 } }]
+    // friends: { animal: 'żółw' }
+    // friends: []
+    // friends: "jacek"
+    // friends: null
+    // friends: true
+  });
+
+  // const pesel: number = 10000000000;
+  // const pesel2: any<number> = 10000000000>
+
+  const setterPesel = (a: boolean, b: string, c: string): (string | number | any) => {
+    if (a) {
+      return b + c
+    }
+    return 'xyz'
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +59,7 @@ function App() {
         >
           Learn React
         </a>
+        <input onChange={(e: ChangeEvent) => setterPesel(true, '1', '1')} />Check!
       </header>
     </div>
   );
