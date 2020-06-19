@@ -9,4 +9,9 @@ router
     .get(UserController.getAll)
     .post(UserController.addUser)
 
+
+router
+    .route('/:id')
+    .get(UserController.findUser)
+
 module.exports = router
