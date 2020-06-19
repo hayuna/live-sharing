@@ -49,4 +49,45 @@ const modifyUser = async (req, res) => {
     }
 }
 
-module.exports = { getAll, addUser, findUser, findUsersWithName, modifyUser }
+const deleteUser = async (req, res) => {
+    try {
+        const user = await userSchema.deleteOne({ _id: req.params.id });
+        res.json(user)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+const deleteAllUsers = async (req, res) => {
+    try {
+        const user = await userSchema.deleteMany({});
+        res.json(user)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+const init = async (req, res) => {
+    const userList = [
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+        { name: 'John', email: 'john@email.pl' },
+    ]
+
+    try {
+        console.log(req.body)
+        const user = await userSchema.insertMany(userList)
+        res.json(user)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+module.exports = { getAll, addUser, findUser, findUsersWithName, modifyUser, deleteUser, deleteAllUsers, init }
