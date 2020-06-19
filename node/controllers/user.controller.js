@@ -21,8 +21,6 @@ const addUser = async (req, res) => {
 
 const findUser = async (req, res) => {
     try {
-        console.log(req.body)
-        console.log(req.params.id)
         const user = await userSchema.find({ _id: req.params.id })
         res.json(user)
     } catch (err) {
@@ -30,4 +28,13 @@ const findUser = async (req, res) => {
     }
 }
 
-module.exports = { getAll, addUser, findUser }
+const findUsersWithName = async (req, res) => {
+    try {
+        const user = await userSchema.find({ name: req.params.name })
+        res.json(user)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+module.exports = { getAll, addUser, findUser, findUsersWithName }

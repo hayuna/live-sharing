@@ -14,4 +14,8 @@ router
     .route('/:id')
     .get(UserController.findUser)
 
+router
+    .route('/findUsersWithName/:name')
+    .get(UserController.findUsersWithName)
+
 module.exports = router
