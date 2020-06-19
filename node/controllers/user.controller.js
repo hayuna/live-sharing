@@ -37,4 +37,16 @@ const findUsersWithName = async (req, res) => {
     }
 }
 
-module.exports = { getAll, addUser, findUser, findUsersWithName }
+const modifyUser = async (req, res) => {
+    try {
+        const user = await userSchema.updateOne(
+            { _id: req.params.id },
+            { name: req.body.name },
+        );
+        res.json(user)
+    } catch (err) {
+        res.send(err)
+    }
+}
+
+module.exports = { getAll, addUser, findUser, findUsersWithName, modifyUser }

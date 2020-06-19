@@ -13,6 +13,7 @@ router
 router
     .route('/:id')
     .get(UserController.findUser)
+    .patch(UserController.modifyUser)
 
 router
     .route('/findUsersWithName/:name')
