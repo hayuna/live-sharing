@@ -1,9 +1,10 @@
 const userSchema = require('../models/user.schema.js')
+const faker = require('faker');
 
 const getAll = async (req, res) => {
     try {
-        const response = await userSchema.find()
-        res.json(response)
+        const response = await userSchema.find().sort({ name: -1 }).limit(101)
+        res.json({ message: response })
     } catch (err) {
         res.send(err)
     }
@@ -41,7 +42,7 @@ const modifyUser = async (req, res) => {
     try {
         const user = await userSchema.updateOne(
             { _id: req.params.id },
-            { name: req.body.name },
+            { name: req.body.name, email: req.body.email }
         );
         res.json(user)
     } catch (err) {
@@ -68,22 +69,15 @@ const deleteAllUsers = async (req, res) => {
 }
 
 const init = async (req, res) => {
-    const userList = [
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-        { name: 'John', email: 'john@email.pl' },
-    ]
+    const newUsers = []
+
+    for (let i = 0; i < 10; i++) {
+        newUsers.push({ name: faker.name.findName(), email: faker.internet.email() })
+    }
 
     try {
         console.log(req.body)
-        const user = await userSchema.insertMany(userList)
+        const user = await userSchema.insertMany(newUsers)
         res.json(user)
     } catch (err) {
         res.send(err)

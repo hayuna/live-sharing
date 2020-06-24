@@ -17,11 +17,16 @@ dotenv.config();
 // console.log();
 
 app.get('/', (request, response) => {
-    response.send('cos ma sie wyswietlic')
+    response.redirect('/404')
 })
 app.get('/akuku', (request, response) => {
     response.send('niespodzianka')
 })
+app.get('/404', (request, response) => {
+    response.status(404).send('404 Not found')
+})
+
+
 
 app.use('/users', userRoutes)
 
