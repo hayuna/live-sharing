@@ -1,21 +1,18 @@
+const router = require('express').Router()
 const UserController = require('../controllers/user.controller')
-const Router = require('express-promise-router')
-const { validateParam, validateBody, schema, schemaId } = require('../validations/user.validation')
-
-const router = Router()
+const { validateBody, validateId, schema } = require('../validations/user.validation')
 
 router
     .route('/')
     .get(UserController.getAll)
-    .post(validateBody(schema), UserController.addUser)
+    .post(validateBody(schema.user.post), UserController.addUser)
     .delete(UserController.deleteAllUsers)
-
 
 router
     .route('/:id')
-    .get(validateParam(schemaId, 'id'), UserController.findUser)
-    .patch([validateParam(schemaId, 'id'), validateBody(schema)], UserController.modifyUser) //add validation and test
-    .delete(validateParam(schemaId, 'id'), UserController.deleteUser) // add validation and test
+    .get(validateId(schema.id), UserController.findUser)
+    .patch(validateId(schema.id), validateBody(schema.user.patch), UserController.modifyUser)
+    .delete(validateId(schema.id), UserController.deleteUser)
 
 router
     .route('/findUsersWithName/:name')

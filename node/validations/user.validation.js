@@ -6,7 +6,7 @@ const validateParam = (schema, name) => {
             param: req.params[name]
         })
         if (result.error) {
-            return res.status(400).json(result.error.details[0].message)
+            return res.status(400).json(result.error)
         } else {
             if (!req.value) req.value = {}
             if (!req.value.params) req.value.params = {}
@@ -30,17 +30,44 @@ const validateBody = schema => {
     }
 }
 
-const schema = Joi.object({
-    name: Joi.string()
-        .min(3)
-        .max(25)
-        .required(),
-    email: Joi.string()
-        .email()
-        .required()
-})
-const schemaId = Joi.object().keys({
-    param: Joi.string().regex(/^[0-9a-fA-Z]{24}$/).required()
-})
+const validateId = (schema) => {
+    return (req, res, next) => {
+        const result = schema.validate({
+            param: req.params.id
+        })
+        if (result.error) {
+            return res.status(400).json(result.error)
+        } else {
+            if (!req.value) req.value = {}
+            if (!req.value.params) req.value.params = {}
+            req.value.params.id = result.value.param
+            next()
+        }
+    }
+}
 
-module.exports = { schema, validateBody, validateParam, schemaId }
+const schema = {
+    user: {
+        post: Joi.object({
+            name: Joi.string()
+                .min(3)
+                .max(25)
+                .required(),
+            email: Joi.string()
+                .email()
+                .required()
+        }),
+        patch: Joi.object({
+            name: Joi.string()
+                .min(3)
+                .max(25),
+            email: Joi.string()
+                .email()
+        })
+    },
+    id: Joi.object().keys({
+        param: Joi.string().regex(/^[0-9a-fA-Z]{24}$/).required()
+    })
+}
+
+module.exports = { schema, validateBody, validateParam, validateId }

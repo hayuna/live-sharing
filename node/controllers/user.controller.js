@@ -42,7 +42,7 @@ const modifyUser = async (req, res) => {
     try {
         const user = await userSchema.updateOne(
             { _id: req.params.id },
-            { name: req.body.name, email: req.body.email }
+            req.body
         );
         res.json(user)
     } catch (err) {
